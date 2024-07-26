@@ -1,0 +1,19 @@
+RUN QEMU
+qemu-system-x86_64 main.bin
+
+SET SYSTEM VARIABLE
+export DISPLAY=:1
+
+cd ../home/usr/Dev/ArkaneOS/Source
+
+cd dev/ArkaneOS/Source
+
+NEED TO RUN THIS WITH ROOT
+
+GDB
+make run
+gdb ../Bin/Debug/ArkaneOS.bin
+target remote localhost:1234
+continue
+Close browsers (retarded)
+-> Now debug lol

@@ -1,15 +1,22 @@
 OS_NAME := ArkaneOS
 RELEASE_DIR := ../Bin/Release
 DEBUG_DIR := ../Bin/Debug
-INCLUDE := -IBoot -IKernel Boot/Bootloader.asm
+INCLUDE := -IBoot Boot/Bootloader.asm
 
-# RELEASE
+# RELEASE cd Dev/ArkaneHigh/Source
 
 compile: 
-	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/$(OS_NAME).bin
+	rm -r ${RELEASE_DIR}
+	mkdir ${RELEASE_DIR}
+
+	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/Bootloader.bin
+	i686-elf-g++ -ffreestanding -c Kernel/Kernel.cpp -o $(RELEASE_DIR)/Kernel.o
+	i686-elf-ld -o $(RELEASE_DIR)/Kernel.bin -Ttext 0x100000 --oformat binary $(RELEASE_DIR)/Kernel.o
+
+	cat ${RELEASE_DIR}/Bootloader.bin ${RELEASE_DIR}/Kernel.bin > ${RELEASE_DIR}/${OS_NAME}.bin
 
 run:
-	qemu-system-x86_64 -drive format=raw,file=$(RELEASE_DIR)/$(OS_NAME).bin -display curses
+	qemu-system-x86_64 -drive format=raw,file=$(RELEASE_DIR)/$(OS_NAME).bin -display curses 
 
 # DEBUG
 

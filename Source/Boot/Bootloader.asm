@@ -2,7 +2,7 @@
 [bits 16]
 
 ; Macros
-%define KERNEL_SIZE 5120 ; Kernel syze in bytes
+%define KERNEL_SIZE 512 ; Kernel syze in bytes
 
 
 section .text
@@ -110,4 +110,6 @@ sector_two:
 %include "Gdt.asm"
 
 [bits 64]
-%include "../Kernel/Kernel.asm"
+kernel_setup:
+    hlt
+    jmp 0x10000

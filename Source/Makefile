@@ -31,13 +31,23 @@ debug:
 	make run_debug
 
 compile_debug:
-	nasm -f bin $(INCLUDE) -g -o $(DEBUG_DIR)/$(OS_NAME).bin
+	rm -r ${DEBUG_DIR}
+	mkdir ${DEBUG_DIR}
+
+	nasm -f bin $(INCLUDE) -g -o $(DEBUG_DIR)/Bootloader.bin
+
+# Build C++ here
+	./BuildDebug.sh
+
+	nasm Kernel/Asm/KernelEntry.asm -f elf -g -o $(DEBUG_DIR)/KernelEntry.o
+	i686-elf-ld -o $(DEBUG_DIR)/FullKernel.bin -Ttext 0x8000 $(DEBUG_DIR)/KernelEntry.o $(DEBUG_DIR)/Kernel.o --oformat binary
+
+	nasm Kernel/Asm/Zeros.asm -f bin -g -o $(DEBUG_DIR)/Zeros.bin
+
+	cat ${DEBUG_DIR}/Bootloader.bin ${DEBUG_DIR}/FullKernel.bin $(DEBUG_DIR)/Zeros.bin > ${DEBUG_DIR}/ArkaneOS.bin
 
 run_debug: 
-	qemu-system-x86_64 -s -S -hda $(DEBUG_DIR)/$(OS_NAME).bin
-
-run_gdb:
-	gdb ../Bin/Debug/ArkaneOS.bin
+	qemu-system-x86_64 -s -S -hda $(DEBUG_DIR)/$(OS_NAME).bin -display curses
 
 # CLEAN
 

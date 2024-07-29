@@ -1,6 +1,6 @@
 #include "Terminal.h"
 
-void Clear()
+void Terminal::Clear()
 {
-    *(char*)0xb8000 = 'Y';
+    *(char*)0xb8000 = 'K';
 }

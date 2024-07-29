@@ -1,4 +1,7 @@
 #pragma once
 
-
-void Clear(); 
+class Terminal
+{
+public:
+    void Clear();
+};

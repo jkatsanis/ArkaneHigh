@@ -2,8 +2,8 @@
 
 # Set your compiler and compiler flags
 CXX=i686-elf-g++
-CXXFLAGS="-ffreestanding -c -nostdlib"
-RELEASE_DIR="../Bin/Release"
+CXXFLAGS="-ffreestanding -g -c -nostdlib"
+DEBUG_DIR="../Bin/Debug"
 
 GREEN='\033[0;32m'  # Green text
 RED='\033[0;31m'  # Red text
@@ -21,7 +21,7 @@ find Kernel -name "*.cpp" -print0 | while IFS= read -r -d $'\0' source_file; do
     base_name=$(basename -- "$source_file")
     object_file="${base_name%.cpp}.o"
 
-    $CXX $CXXFLAGS "$source_file" -o $RELEASE_DIR/$object_file
+    $CXX $CXXFLAGS "$source_file" -o $DEBUG_DIR/$object_file
 
     if [ $? -ne 0 ]; then
         echo -e "${RED} Error compiling: $base_name${NC}"
@@ -41,11 +41,11 @@ else
 fi
 echo "==================="
 
-o_files=$RELEASE_DIR/*.o
+o_files=$DEBUG_DIR/*.o
 
-echo "Linking Kernel.. i686-elf-ld -r -o $RELEASE_DIR/Kernel.o" $o_files 
+echo "Linking Kernel.. i686-elf-ld -r -o $DEBUG_DIR/Kernel.o" $o_files 
 
-i686-elf-ld -r -o $RELEASE_DIR/Kernel.o $RELEASE_DIR/*.o
+i686-elf-ld -r -o $DEBUG_DIR/Kernel.o $DEBUG_DIR/*.o
 
 if [ $? -ne 0 ]; then
     echo -e "${RED} Linking failed!${NC}"

@@ -5,11 +5,9 @@ extern "C" void main(){
     *(char*)0xb8000 = 'Z';
     
     Terminal t;
-    
-    asm volatile ("hlt");
-
     t.Clear();
-
+    t.Stop();
+    
     return;
 }
 

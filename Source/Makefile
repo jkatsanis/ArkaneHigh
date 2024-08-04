@@ -9,17 +9,21 @@ compile:
 	rm -r ${RELEASE_DIR}
 	mkdir ${RELEASE_DIR}
 
-	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/Bootloader.bin
-
-# Build C++ here
 	./Build.sh
-
-	nasm Kernel/Asm/KernelEntry.asm -f elf -o $(RELEASE_DIR)/KernelEntry.o
-	i686-elf-ld -o $(RELEASE_DIR)/FullKernel.bin -Ttext 0x8000 $(RELEASE_DIR)/KernelEntry.o $(RELEASE_DIR)/Kernel.o --oformat binary
-
+	@echo Compiling assembly...
+	nasm -f bin $(INCLUDE) -o $(RELEASE_DIR)/Bootloader.bin
+	nasm Kernel/Asm/KernelEntry.asm -f elf64 -o $(RELEASE_DIR)/KernelEntry.o
 	nasm Kernel/Asm/Zeros.asm -f bin -o $(RELEASE_DIR)/Zeros.bin
+	@echo ================
 
+	@echo Linking object files....
+	x86_64-elf-ld -o $(RELEASE_DIR)/FullKernel.bin -Ttext 0x8000 $(RELEASE_DIR)/KernelEntry.o $(RELEASE_DIR)/Kernel.o --oformat binary
+	@echo ================
+	
+	@echo Creating the final binary...
 	cat ${RELEASE_DIR}/Bootloader.bin ${RELEASE_DIR}/FullKernel.bin $(RELEASE_DIR)/Zeros.bin > ${RELEASE_DIR}/ArkaneOS.bin
+	@echo ================
+	@echo OS build complete
 
 run:
 	qemu-system-x86_64 -drive format=raw,file=$(RELEASE_DIR)/$(OS_NAME).bin -display curses

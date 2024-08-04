@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set your compiler and compiler flags
-CXX=i686-elf-g++
+CXX="x86_64-elf-gcc"
 CXXFLAGS="-ffreestanding -c -nostdlib"
 RELEASE_DIR="../Bin/Release"
 
@@ -45,7 +45,7 @@ o_files=$RELEASE_DIR/*.o
 
 echo "Linking Kernel.. i686-elf-ld -r -o $RELEASE_DIR/Kernel.o" $o_files 
 
-i686-elf-ld -r -o $RELEASE_DIR/Kernel.o $RELEASE_DIR/*.o
+x86_64-elf-ld -r $RELEASE_DIR/*.o -o $RELEASE_DIR/Kernel.o
 
 if [ $? -ne 0 ]; then
     echo -e "${RED} Linking failed!${NC}"

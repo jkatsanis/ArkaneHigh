@@ -2,7 +2,7 @@
 
 # Set your compiler and compiler flags
 CXX=i686-elf-g++
-CXXFLAGS="-ffreestanding -g -c -nostdlib"
+CXXFLAGS="-ffreestanding  -g -c -nostdlib"
 DEBUG_DIR="../Bin/Debug"
 
 GREEN='\033[0;32m'  # Green text

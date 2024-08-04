@@ -1,8 +1,14 @@
 #pragma once
 
-class Terminal
+#include "Types.h"
+#include "Macros.h"
+
+namespace Arkn
 {
-public:
-    void Clear();
-    void Stop();
-};
+    class Terminal
+    {
+    public:
+        void FillScreen(uint64_t color);
+        void Stop();
+    };
+}

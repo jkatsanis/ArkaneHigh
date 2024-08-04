@@ -4,9 +4,9 @@
 extern "C" void main(){
     *(char*)0xb8000 = 'Z';
     
-    Terminal t;
-    t.Clear();
-    t.Stop();
+    Arkn::Terminal t;
+    
+    t.FillScreen(0x1f201f201f201f20);
     
     return;
 }

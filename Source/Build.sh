@@ -4,6 +4,7 @@
 CXX="x86_64-elf-gcc"
 CXXFLAGS="-ffreestanding -c -nostdlib"
 RELEASE_DIR="../Bin/Release"
+INCLUDE_PATHS="-IKernel/Standard -IKernel/Standard/String -IKernel/Data"
 
 GREEN='\033[0;32m'  # Green text
 RED='\033[0;31m'  # Red text
@@ -16,12 +17,11 @@ build_status=1
 echo "$build_status" > build_error.txt
 
 # Compile all .cpp files found in the Source directory and its subdirectories
-# Loop over all regular .cpp files
 find Kernel -name "*.cpp" -print0 | while IFS= read -r -d $'\0' source_file; do
     base_name=$(basename -- "$source_file")
     object_file="${base_name%.cpp}.o"
 
-    $CXX $CXXFLAGS "$source_file" -o $RELEASE_DIR/$object_file
+    $CXX $CXXFLAGS $INCLUDE_PATHS "$source_file" -o $RELEASE_DIR/$object_file
 
     if [ $? -ne 0 ]; then
         echo -e "${RED} Error compiling: $base_name${NC}"

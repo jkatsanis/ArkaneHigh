@@ -1,5 +1,5 @@
 # ArkaneOS
-A very "unique" and small operating system working only in kernel lol.
+A very small operating system working only in kernel lol.
 
 ## Tools used
 - Programming language: Assembly, C++
@@ -10,4 +10,3 @@ A very "unique" and small operating system working only in kernel lol.
 
 - 64 BIT
 - Qeemu for the .bin file
-- No paging (I want to kind of implement a way 

@@ -18,3 +18,6 @@ typedef long int64_t;
 typedef uint32_t size_t;
 
 typedef unsigned long Color64;
+
+// ===== CALLBACKS ======
+typedef void (*Callback)();

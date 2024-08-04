@@ -7,11 +7,19 @@ void Arkn::ArKernel::Update()
     t.FillScreen();
 
     t.TRenderer.WriteLine("Hello");
-    t.TRenderer.WriteString("Hello", Arkn::Point(5, 5));
+
+    char hex_str[3];  //
 
     while (1)
     {
-       //  uint8_t keypressed = Arkn::IO::Inb(0x60);
-       //  Arkn::TextRenderer::WriteLine(keypressed);
+        uint8_t keypressed = Arkn::IO::Inb(0x60);
+        Arkn::String::Uint8ToHexString(keypressed, hex_str);
+
+        int32_t rtnCode = t.TRenderer.WriteLine(Arkn::String(hex_str));
+        if(rtnCode == -1)
+        {
+            t.FillScreen();
+        }
+
     }    
 }

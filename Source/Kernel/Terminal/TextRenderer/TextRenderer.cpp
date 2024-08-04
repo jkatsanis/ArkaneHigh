@@ -24,11 +24,17 @@ void Arkn::TextRenderer::WriteString(const Arkn::String& string, Arkn::Point poi
     }
 }
 
-void Arkn::TextRenderer::WriteLine(const Arkn::String& line)
+int32_t Arkn::TextRenderer::WriteLine(const Arkn::String& line)
 {
-    const Arkn::Point point(0, m_CurrentYPos);
+    const Arkn::Point point(0, CurrentYPos);
 
     Arkn::TextRenderer::WriteString(line, point);
 
-    m_CurrentYPos++;
+    if(CurrentYPos == 100)
+    {
+        CurrentYPos = 0;
+        return -1;
+    }
+    CurrentYPos++;
+    return 0;
 }

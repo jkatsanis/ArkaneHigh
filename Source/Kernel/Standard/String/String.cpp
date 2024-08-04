@@ -30,3 +30,14 @@ void Arkn::String::StringCopy(char dest[], const char src[])
         i++;
     } 
 }
+
+void Arkn::String::Uint8ToHexString(uint8_t value, char* buffer)
+{
+    const char hex_chars[] = "0123456789abcdef";
+    
+    buffer[0] = hex_chars[(value >> 4) & 0x0F];
+    
+    buffer[1] = hex_chars[value & 0x0F];
+    
+    buffer[2] = '\0';
+}

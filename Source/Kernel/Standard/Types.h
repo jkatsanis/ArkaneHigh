@@ -16,3 +16,5 @@ typedef int int32_t;
 typedef long int64_t;
 
 typedef uint32_t size_t;
+
+typedef unsigned long Color64;

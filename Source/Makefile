@@ -17,7 +17,7 @@ compile:
 	@echo ================
 
 	@echo Linking object files....
-	x86_64-elf-ld -o $(RELEASE_DIR)/FullKernel.bin -T linker.ld $(RELEASE_DIR)/KernelEntry.o $(RELEASE_DIR)/Kernel.o --oformat binary
+	x86_64-elf-ld -o $(RELEASE_DIR)/FullKernel.bin -T linker.ld $(RELEASE_DIR)/*.o --oformat binary
 	@echo ================
 	
 	@echo Creating the final binary...

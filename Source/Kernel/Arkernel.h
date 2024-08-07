@@ -2,6 +2,7 @@
 
 #include "Cursor.h"
 #include "Terminal/Terminal.h" 
+#include "idt.h"
 
 namespace Arkn
 {

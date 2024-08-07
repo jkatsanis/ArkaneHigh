@@ -4,7 +4,7 @@ BUILD_TYPE=$1
 CXX="x86_64-elf-gcc"
 CXXFLAGS="-ffreestanding -c -nostdlib"
 OUTPUT_DIR="../Bin/$BUILD_TYPE"
-INCLUDE_PATHS="-IKernel/Standard -IKernel/Standard/String -IKernel/Data"
+INCLUDE_PATHS="-IKernel/Standard -IKernel/Standard/String -IKernel/Data -IKernel/Terminal/TextRenderer -IKernel/Driver"
 
 # Colors
 GREEN='\033[0;32m'              # Green text
@@ -44,20 +44,5 @@ if [ "$build_status_file" -eq 2 ]; then
 else
     echo -e "${GREEN} CPPBuild completed successfully!${NC}"
 fi
-echo "==================="
-
-# Kernel linking
-o_files=$OUTPUT_DIR/*.o
-echo "Linking Kernel.. x86_64-elf-ld -r -o $OUTPUT_DIR/Kernel.o" $o_files 
-
-x86_64-elf-ld -r $OUTPUT_DIR/*.o -o $OUTPUT_DIR/Kernel.o
-
-if [ $? -ne 0 ]; then
-    echo -e "${RED} Linking failed!${NC}"
-    exit 1
-else
-    echo -e "${GREEN} Linking completed successfully!${NC}"
-fi
-
 echo "==================="
 rm build_error.txt

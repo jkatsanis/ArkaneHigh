@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Set your compiler and compiler flags
+BUILD_TYPE=$1
 CXX="x86_64-elf-gcc"
 CXXFLAGS="-ffreestanding -c -nostdlib"
 RELEASE_DIR="../Bin/Release"
@@ -11,7 +12,7 @@ RED='\033[0;31m'  # Red text
 NC='\033[0m'        # No color (reset)
 
 echo "==================="
-echo "Build started..."
+echo "Build started..., you are compiling for $BUILD_TYPE"
 
 build_status=1
 echo "$build_status" > build_error.txt

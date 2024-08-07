@@ -1,27 +1,32 @@
 #!/bin/bash
-
 # Set your compiler and compiler flags
-CXX=i686-elf-g++
-CXXFLAGS="-ffreestanding  -g -c -nostdlib"
-DEBUG_DIR="../Bin/Debug"
+BUILD_TYPE=$1
+CXX="x86_64-elf-gcc"
+CXXFLAGS="-ffreestanding -c -nostdlib"
+OUTPUT_DIR="../Bin/$BUILD_TYPE"
+INCLUDE_PATHS="-IKernel/Standard -IKernel/Standard/String -IKernel/Data"
 
-GREEN='\033[0;32m'  # Green text
-RED='\033[0;31m'  # Red text
-NC='\033[0m'        # No color (reset)
+# Colors
+GREEN='\033[0;32m'              # Green text
+RED='\033[0;31m'                # Red text
+NC='\033[0m'                    # No color (reset)
 
 echo "==================="
-echo "Build started..."
+echo "Build started, you are compiling for $BUILD_TYPE..."
 
 build_status=1
 echo "$build_status" > build_error.txt
 
 # Compile all .cpp files found in the Source directory and its subdirectories
-# Loop over all regular .cpp files
 find Kernel -name "*.cpp" -print0 | while IFS= read -r -d $'\0' source_file; do
     base_name=$(basename -- "$source_file")
     object_file="${base_name%.cpp}.o"
 
-    $CXX $CXXFLAGS "$source_file" -o $DEBUG_DIR/$object_file
+    if [ "$BUILD_TYPE" = "Release" ]; then
+        $CXX $CXXFLAGS $INCLUDE_PATHS "$source_file" -o $OUTPUT_DIR/$object_file
+    elif [ "$BUILD_TYPE" = "Debug" ]; then
+        $CXX $CXXFLAGS $INCLUDE_PATHS -g "$source_file" -o $OUTPUT_DIR/$object_file
+    fi
 
     if [ $? -ne 0 ]; then
         echo -e "${RED} Error compiling: $base_name${NC}"
@@ -41,11 +46,11 @@ else
 fi
 echo "==================="
 
-o_files=$DEBUG_DIR/*.o
+# Kernel linking
+o_files=$OUTPUT_DIR/*.o
+echo "Linking Kernel.. x86_64-elf-ld -r -o $OUTPUT_DIR/Kernel.o" $o_files 
 
-echo "Linking Kernel.. i686-elf-ld -r -o $DEBUG_DIR/Kernel.o" $o_files 
-
-i686-elf-ld -r -o $DEBUG_DIR/Kernel.o $DEBUG_DIR/*.o
+x86_64-elf-ld -r $OUTPUT_DIR/*.o -o $OUTPUT_DIR/Kernel.o
 
 if [ $? -ne 0 ]; then
     echo -e "${RED} Linking failed!${NC}"
@@ -54,7 +59,5 @@ else
     echo -e "${GREEN} Linking completed successfully!${NC}"
 fi
 
-
 echo "==================="
-
 rm build_error.txt

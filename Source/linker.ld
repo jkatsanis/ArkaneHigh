@@ -1,23 +1,19 @@
-ENTRY(kernel_entry)
+ENTRY(KernelEntry) /* Calls the KernelEntry label */
 
 SECTIONS
 {
-    /* Set the start address for the code */
     . = 0x8000;
 
-    /* The .text section contains executable code */
     .text : {
-        *(.text)       /* Collect all .text sections from object files */
+        *(.text)      
     }
 
-    /* The .data section contains initialized global variables */
     .data : {
-        *(.data)       /* Collect all .data sections from object files */
+        *(.data)       
     }
 
-    /* The .bss section contains uninitialized global variables */
     .bss : {
-        *(.bss)        /* Collect all .bss sections from object files */
+        *(.bss)      
     }
 
     /* End of the program */

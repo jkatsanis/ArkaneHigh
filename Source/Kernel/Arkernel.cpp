@@ -6,7 +6,7 @@ void Arkn::ArKernel::Update()
     
     t.FillScreen();
 
-    t.TRenderer.WriteLine("Hello");
+    TextRenderer::WriteLine("Hello");
 
     char hex_str[3];  //
 
@@ -15,7 +15,7 @@ void Arkn::ArKernel::Update()
         uint8_t keypressed = Arkn::IO::Inb(0x60);
         Arkn::String::Uint8ToHexString(keypressed, hex_str);
 
-        int32_t rtnCode = t.TRenderer.WriteLine(Arkn::String(hex_str));
+        int32_t rtnCode = TextRenderer::WriteLine(Arkn::String(hex_str));
         if(rtnCode == -1)
         {
             t.FillScreen();

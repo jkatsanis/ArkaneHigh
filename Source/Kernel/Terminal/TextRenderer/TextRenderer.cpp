@@ -1,12 +1,13 @@
 #include "TextRenderer.h"
 
-Arkn::TextRenderer::TextRenderer(uint8_t fg, uint8_t bg)
-    : m_TextColor(fg), m_BgColor(bg)
+// Static public functions
+
+void Arkn::TextRenderer::Update(uint8_t txt, uint8_t bg)
 {
-    
+    Arkn::TextRenderer::m_TextColor = txt;
+    Arkn::TextRenderer::m_BgColor = bg;
 }
 
-// Static public functions
 void Arkn::TextRenderer::WriteCharacter(uint8_t c, uint8_t forecolour, uint8_t backcolour, Arkn::Point point)
 {
     uint16_t attrib = (backcolour << 4) | (forecolour & 0x0F);
@@ -24,17 +25,6 @@ void Arkn::TextRenderer::WriteString(const Arkn::String& string, Arkn::Point poi
     }
 }
 
-int32_t Arkn::TextRenderer::WriteLine(const Arkn::String& string, uint32_t pos)
-{
-    const Arkn::Point point(0, pos);
-
-    Arkn::TextRenderer::WriteString(string, point, 15, 0);
-
-    pos++;
-
-    return (pos == 100) ? -1 : 0;
-}
-
 int32_t Arkn::TextRenderer::WriteLine(const Arkn::String& line)
 {
     const Arkn::Point point(0, CurrentYPos);
@@ -49,3 +39,7 @@ int32_t Arkn::TextRenderer::WriteLine(const Arkn::String& line)
     CurrentYPos++;
     return 0;
 }
+
+uint32_t Arkn::TextRenderer::CurrentYPos = 0;
+uint8_t Arkn::TextRenderer::m_BgColor = 0;
+uint8_t Arkn::TextRenderer::m_TextColor = 0;

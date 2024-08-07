@@ -14,8 +14,6 @@ namespace Arkn
         Color64 m_TerminalColor;
 
     public:
-        TextRenderer TRenderer;
-
         Terminal();
         Terminal(Color64 color);
 

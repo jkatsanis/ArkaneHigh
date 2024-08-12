@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Globals.h"
 #include "Cursor.h"
 #include "Terminal/Terminal.h" 
 #include "InterruptHandler.h"

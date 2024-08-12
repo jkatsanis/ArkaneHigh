@@ -9,7 +9,7 @@ namespace Arkn
         uint8_t scan_code = IO::Inb(0x60); // Read scan code from keyboard data port
 
         // Call your function to handle the key press
-        TextRenderer::WriteLine("Mann");
+        nKeyboardDriver_ptr->OnKeyboardPress(5);
 
         // Send EOI (End of Interrupt) to PICs
         PIC::SendEoi(1);

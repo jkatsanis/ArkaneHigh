@@ -10,6 +10,8 @@ void Arkn::ArKernel::Update()
 
     // char hex_str[3];  // cd Dev/ArkaneHigh/Source
     m_InterruptHandler.Init();
+    
+    nKeyboardDriver_ptr = &m_KeyboardDriver;
 
     while(1){ }
 }

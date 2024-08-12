@@ -1,6 +1,6 @@
 #include "KeyboardDriver.h"
 
-Arkn::KeyboardDriver::OnKeyboardPress(uint8_t scan)
+void Arkn::KeyboardDriver::OnKeyboardPress(uint8_t scan)
 {
-    
+    TextRenderer::WriteLine("saug");
 }

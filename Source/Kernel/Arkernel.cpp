@@ -1,17 +1,15 @@
 #include "Arkernel.h"
 
 void Arkn::ArKernel::Update()
-{
-    Terminal t(COLOR_GREEN);
-    
-    t.FillScreen();
-
-    TextRenderer::WriteLine("Hello");
-
-    // char hex_str[3];  // cd Dev/ArkaneHigh/Source
+{    
+    // Creating the systems
     m_InterruptHandler.Init();
-    
     nKeyboardDriver_ptr = &m_KeyboardDriver;
+
+
+    // Initing programs
+
+    m_TerminalProgram.StartProgram();
 
     while(1){ }
 }

@@ -7,9 +7,10 @@ OUTPUT_DIR="../Bin/$BUILD_TYPE"
 INCLUDE_PATHS="-IKernel/Standard 
                -IKernel/Standard/String 
                -IKernel/Data 
-               -IKernel/Terminal/TextRenderer 
+               -IKernel/TextRenderer 
                -IKernel/Driver/Interrupts
-               -IKernel/Driver/Keyboard"
+               -IKernel/Driver/Keyboard
+               -IPrograms"
 
 # Colors
 GREEN='\033[0;32m'              # Green text
@@ -23,7 +24,7 @@ build_status=1
 echo "$build_status" > build_error.txt
 
 # Compile all .cpp files found in the Source directory and its subdirectories
-find Kernel -name "*.cpp" -print0 | while IFS= read -r -d $'\0' source_file; do
+find Kernel Programs -name "*.cpp" -print0 | while IFS= read -r -d $'\0' source_file; do
     base_name=$(basename -- "$source_file")
     object_file="${base_name%.cpp}.o"
 

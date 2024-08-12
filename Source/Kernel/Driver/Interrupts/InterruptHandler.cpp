@@ -18,7 +18,7 @@ void Arkn::InterruptHandler::IDTInit() {
 
     // Directly set ISR handlers in the IDT
     // Set up the keyboard ISR (IRQ1) at vector 33
-    IDTSetDescriptor(0x21 , (void*)keyboard_isr_handler, 0x8E);
+    IDTSetDescriptor(0x21 , (void*)ISRKeyboardHandler, 0x8E);
     // Continue with other handlers as needed
 
     __asm__ volatile ("lidt %0" : : "m"(idtr)); // Load the new IDT

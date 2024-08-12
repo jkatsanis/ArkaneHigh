@@ -2,9 +2,9 @@
 
 #include "Globals.h"
 #include "Cursor.h"
-#include "Terminal/Terminal.h" 
 #include "InterruptHandler.h"
 #include "KeyboardDriver.h"
+#include "Terminal.h"
 
 namespace Arkn
 {
@@ -13,6 +13,8 @@ namespace Arkn
     private:
         InterruptHandler m_InterruptHandler;
         KeyboardDriver m_KeyboardDriver;
+
+        Terminal m_TerminalProgram;
 
     public:
         ArKernel() = default;

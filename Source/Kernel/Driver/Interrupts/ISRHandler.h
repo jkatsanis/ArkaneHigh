@@ -7,5 +7,5 @@
 
 namespace Arkn
 {
-    void keyboard_isr_handler();
+    void ISRKeyboardHandler();
 }

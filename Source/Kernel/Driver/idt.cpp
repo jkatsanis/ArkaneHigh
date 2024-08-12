@@ -17,7 +17,10 @@ void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
 }
 
 void keyboard_isr_handler() {
+    asm("cli");
+
     uint8_t scan_code = IO::Inb(0x60); // Read scan code from keyboard data port
+    register int i;
 
     // Call your function to handle the key press
     TextRenderer::WriteLine("Mann");
@@ -26,10 +29,12 @@ void keyboard_isr_handler() {
     send_eoi(1);
 
    int scan = inb(0x60);
-   int i = inb(0x61);
+   i = inb(0x61);
    outb(0x61, i|0x80);
    outb(0x61, i);
-   send_eoi(1);
+   send_eoi(1); 
+      asm("sti");
+
 }
 
 void idt_init() {

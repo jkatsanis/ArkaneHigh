@@ -3,6 +3,7 @@
 #include "Types.h"
 #include "IO.h"
 #include "TextRenderer.h"
+#include "pic.h"
 
 #define IDT_MAX_DESCRIPTORS 256
 
@@ -26,7 +27,6 @@ struct __attribute__((packed)) IDTR {
 // Functions for IDT management
 void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags);
 void idt_init();
-void pic_remap();
 void keyboard_isr();
 void on_keyboard_press(uint8_t scan_code);
 void init_idt();

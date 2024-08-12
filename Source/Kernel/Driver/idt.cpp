@@ -1,7 +1,7 @@
 #include "idt.h"
 
 // Define IDT and IDTR
-__attribute__((aligned(0x10))) static IDTEntry idt[IDT_MAX_DESCRIPTORS];
+static IDTEntry idt[IDT_MAX_DESCRIPTORS];
 static IDTR idtr;
 
 void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
@@ -17,7 +17,19 @@ void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
 }
 
 void keyboard_isr_handler() {
-    TextRenderer::WriteLine("TROLLL");
+    uint8_t scan_code = IO::Inb(0x60); // Read scan code from keyboard data port
+
+    // Call your function to handle the key press
+    TextRenderer::WriteLine("Mann");
+
+    // Send EOI (End of Interrupt) to PICs
+    send_eoi(1);
+
+   int scan = inb(0x60);
+   int i = inb(0x61);
+   outb(0x61, i|0x80);
+   outb(0x61, i);
+   send_eoi(1);
 }
 
 void idt_init() {
@@ -35,41 +47,12 @@ void idt_init() {
 }
 
 
-void pic_remap() {
-    // Save masks
-    uint8_t master_mask = IO::Inb(0x21);
-    uint8_t slave_mask = IO::Inb(0xA1);
-
-    // Initialize Master PIC (ICW1)
-    IO::Outb(0x20, 0x11);
-    IO::Outb(0x21, 0x20);
-    IO::Outb(0x21, 0x04);
-    IO::Outb(0x21, 0x01);
-
-    // Initialize Slave PIC (ICW1)
-    IO::Outb(0xA0, 0x11);
-    IO::Outb(0xA1, 0x28);
-    IO::Outb(0xA1, 0x02);
-    IO::Outb(0xA1, 0x01);
-
-    // Restore saved masks
-    IO::Outb(0x21, master_mask);
-    IO::Outb(0xA1, slave_mask);
-}
-
-
-void keyboard_isr() {
-    uint8_t scan_code = IO::Inb(0x60); // Read scan code from keyboard data port
-
-    // Call your function to handle the key press
-    on_keyboard_press(scan_code);
-
-    // Send EOI (End of Interrupt) to PICs
-    IO::Outb(0x20, 0x20);
-    IO::Outb(0xA0, 0x20);
-}
-
 void init_idt() {
-    pic_remap();
-    idt_init();
+   remap_pics(0x20, 0x28);
+
+   asm("cli");
+   disable_irq(0);
+   enable_irq(1);
+
+   idt_init();
 }

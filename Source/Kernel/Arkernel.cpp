@@ -9,7 +9,7 @@ void Arkn::ArKernel::Update()
     TextRenderer::WriteLine("Hello");
 
     // char hex_str[3];  // cd Dev/ArkaneHigh/Source
-    init_idt();
+    m_InterruptHandler.Init();
 
     while(1){ }
 }

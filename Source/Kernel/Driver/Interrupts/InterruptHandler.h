@@ -3,11 +3,10 @@
 #include "Types.h"
 #include "IO.h"
 #include "TextRenderer.h"
-#include "pic.h"
+#include "PIC.h"
+#include "ISRHandler.h"
 
 #define IDT_MAX_DESCRIPTORS 256
-
-using namespace Arkn;
 
 struct __attribute__((packed)) IDTEntry {
     uint16_t isr_low;
@@ -24,9 +23,21 @@ struct __attribute__((packed)) IDTR {
     uint64_t base;
 };
 
-// Functions for IDT management
-void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags);
-void idt_init();
-void keyboard_isr();
-void on_keyboard_press(uint8_t scan_code);
-void init_idt();
+namespace Arkn
+{
+    class InterruptHandler
+    {
+    private:
+        void IDTSetDescriptor(uint8_t vector, void* isr, uint8_t flags);
+        void IDTInit();
+
+        IDTEntry idt[IDT_MAX_DESCRIPTORS];
+        IDTR idtr;
+
+    public:
+        InterruptHandler() = default;
+
+        void Init();   
+    };
+
+} 

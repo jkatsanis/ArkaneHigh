@@ -1,4 +1,4 @@
-#include "pic.h"
+#include "PIC.h"
 
 unsigned short int Arkn::PIC::ocw1 = 0xFFFF;
 

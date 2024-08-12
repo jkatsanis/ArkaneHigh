@@ -24,48 +24,25 @@ void remap_pics(int pic1, int pic2)
    outb(PIC1 + 1, 0xFF);
 }
 
-/* enable_irq()
- * sends command to PIC to enable an IRQ
- */
+
 void enable_irq(int irq)
 {
-   ocw1 &= ~(1 << irq);   /* enable propriate bit with shifting to left
-               invert the thing to enable the interrupt
-               use AND operation to leave the other bits
-               as they are
-             */
+   ocw1 &= ~(1 << irq);  
    if (irq < 8)
-      outb(PIC1 + 1, ocw1&0xFF);   /* AND with 0xFF to clear the high 8 
-                       bits because we send to PIC1
-                   */
+      outb(PIC1 + 1, ocw1&0xFF);   
    else
-      outb(PIC2 + 1, ocw1 >> 8);   /* move high 8 bits to low 8 bits
-                     since we send to PIC2
-                   */
+      outb(PIC2 + 1, ocw1 >> 8);  
 }
 
-/* disable_irq()
- * sends a command to PIC to disable an IRQ
- */
 void disable_irq(int irq)
 {
-   ocw1 |= (1 << irq);   /* shift left to disable the propriate bit
-               OR to not change the mask
-             */
-
+   ocw1 |= (1 << irq);   
    if (irq < 8)
-      outb(PIC1 + 1, ocw1&0xFF);   /* AND with 0xFF to clear the
-                     high 8 bits since we send to PIC1
-                   */
+      outb(PIC1 + 1, ocw1&0xFF);   
    else
-      outb(PIC2 + 1, ocw1 >> 8);   /* move high 8 bits to low 8 bits since
-                     we send to PIC2
-                   */
+      outb(PIC2 + 1, ocw1 >> 8);   
 }
 
-/* send_eoi()
- * sends a EOI to the PICs involved in the IRQ operation
- */
 void send_eoi(int irq)
 {
    if (irq > 7)

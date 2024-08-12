@@ -28,13 +28,7 @@ void keyboard_isr_handler() {
     // Send EOI (End of Interrupt) to PICs
     send_eoi(1);
 
-   int scan = inb(0x60);
-   i = inb(0x61);
-   outb(0x61, i|0x80);
-   outb(0x61, i);
-   send_eoi(1); 
-      asm("sti");
-
+    asm("sti");
 }
 
 void idt_init() {
@@ -47,17 +41,20 @@ void idt_init() {
     // Continue with other handlers as needed
 
     __asm__ volatile ("lidt %0" : : "m"(idtr)); // Load the new IDT
-    __asm__ volatile ("sti"); // Set the interrupt flag
-
 }
 
 
-void init_idt() {
-   remap_pics(0x20, 0x28);
+void init_idt() 
+{
+    // Disable interrupts
+    asm("cli"); 
 
-   asm("cli");
-   disable_irq(0);
-   enable_irq(1);
+    remap_pics(0x20, 0x28);
 
-   idt_init();
+    enable_irq(1);
+
+    idt_init();
+
+    // Enable interrupts
+    asm("sti"); 
 }

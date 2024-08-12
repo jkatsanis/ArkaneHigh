@@ -3,6 +3,7 @@
 #include "Cursor.h"
 #include "Terminal/Terminal.h" 
 #include "InterruptHandler.h"
+#include "KeyboardDriver.h"
 
 namespace Arkn
 {
@@ -10,6 +11,7 @@ namespace Arkn
     {
     private:
         InterruptHandler m_InterruptHandler;
+        KeyboardDriver m_KeyboardDriver;
 
     public:
         ArKernel() = default;

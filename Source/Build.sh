@@ -4,7 +4,12 @@ BUILD_TYPE=$1
 CXX="x86_64-elf-gcc"
 CXXFLAGS="-ffreestanding -c -nostdlib"
 OUTPUT_DIR="../Bin/$BUILD_TYPE"
-INCLUDE_PATHS="-IKernel/Standard -IKernel/Standard/String -IKernel/Data -IKernel/Terminal/TextRenderer -IKernel/Driver/Interrupts"
+INCLUDE_PATHS="-IKernel/Standard 
+               -IKernel/Standard/String 
+               -IKernel/Data 
+               -IKernel/Terminal/TextRenderer 
+               -IKernel/Driver/Interrupts
+               -IKernel/Driver/Keyboard"
 
 # Colors
 GREEN='\033[0;32m'              # Green text

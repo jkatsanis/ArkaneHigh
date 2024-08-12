@@ -20,13 +20,12 @@ void keyboard_isr_handler() {
     asm("cli");
 
     uint8_t scan_code = IO::Inb(0x60); // Read scan code from keyboard data port
-    register int i;
 
     // Call your function to handle the key press
     TextRenderer::WriteLine("Mann");
 
     // Send EOI (End of Interrupt) to PICs
-    send_eoi(1);
+    PIC::SendEoi(1);
 
     asm("sti");
 }
@@ -49,9 +48,9 @@ void init_idt()
     // Disable interrupts
     asm("cli"); 
 
-    remap_pics(0x20, 0x28);
+    PIC::Remap(0x20, 0x28);
 
-    enable_irq(1);
+    PIC::EnableIrq(1);
 
     idt_init();
 

@@ -21,5 +21,10 @@ namespace Arkn
                         : "memory");
             return ret;
         }
+
+        static inline void IoWait()
+        {
+            IO::Outb(0x80, 0);
+        }
     };
 }

@@ -1,27 +1,36 @@
 #include "pic.h"
 
-unsigned short int ocw1 = 0xFFFF;   /* short int = 16 bits */
+unsigned short int ocw1 = 0xFFFF; 
 
 void remap_pics(int pic1, int pic2)
 {
-   /* send ICW1 */
-   outb(PIC1, ICW1);
-   outb(PIC2, ICW1);
+  uint8_t pic_1_mask, pic_2_mask;
 
-   /* send ICW2 */
-   outb(PIC1 + 1, pic1);   /* remap
-   outb(PIC2 + 2, pic2);      pics */
+    pic_1_mask = inb(PIC1_DATA);
+    pic_2_mask = inb(PIC2_DATA);
 
-   /* send ICW3 */
-   outb(PIC1 + 1, 4);   /* IRQ2 -> connection to slave */
-   outb(PIC2 + 1, 2);
+    outb(PIC1, 0x11);
+    io_wait();
+    outb(PIC2, 0x11);
+    io_wait();
 
-   /* send ICW4 */
-   outb(PIC1 + 1, ICW4);
-   outb(PIC2 + 1, ICW4);
+    outb(PIC1_DATA, pic1);
+    io_wait();
+    outb(PIC2_DATA, pic2);
+    io_wait();
+    
+    outb(PIC1_DATA, 0x4);
+    io_wait();
+    outb(PIC2_DATA, 0x2);
+    io_wait();
+   
+    outb(PIC1_DATA, 0x1); 
+    io_wait();
+    outb(PIC2_DATA, 0x1); 
+    io_wait();
 
-   /* disable all IRQs */
-   outb(PIC1 + 1, 0xFF);
+    outb(PIC1_DATA, pic_1_mask);
+    outb(PIC2_DATA, pic_2_mask);
 }
 
 

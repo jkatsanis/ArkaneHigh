@@ -2,7 +2,7 @@
 # Set your compiler and compiler flags
 BUILD_TYPE=$1
 CXX="x86_64-elf-gcc"
-CXXFLAGS="-ffreestanding -c -nostdlib"
+CXXFLAGS="-ffreestanding -c -nostdlib -fno-rtti"
 OUTPUT_DIR="../Bin/$BUILD_TYPE"
 INCLUDE_PATHS="-IKernel/Standard 
                -IKernel/Standard/String 
@@ -10,7 +10,7 @@ INCLUDE_PATHS="-IKernel/Standard
                -IKernel/TextRenderer 
                -IKernel/Driver/Interrupts
                -IKernel/Driver/Keyboard
-               -IPrograms"
+               -IPrograms/Arkane"
 
 # Colors
 GREEN='\033[0;32m'              # Green text

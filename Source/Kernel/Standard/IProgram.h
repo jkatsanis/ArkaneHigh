@@ -5,6 +5,6 @@ namespace Arkn
     class IProgram
     {
     public:
-        virtual void StartProgram() = 0;
+        virtual void StartProgram() { };
     };
 }

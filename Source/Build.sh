@@ -2,7 +2,7 @@
 # Set your compiler and compiler flags
 BUILD_TYPE=$1
 CXX="x86_64-elf-gcc"
-CXXFLAGS="-ffreestanding -c -nostdlib -fno-rtti"
+CXXFLAGS="-ffreestanding -c -nostdlib -fno-rtti -Wall"
 OUTPUT_DIR="../Bin/$BUILD_TYPE"
 INCLUDE_PATHS="-IKernel/Standard 
                -IKernel/Standard/String 

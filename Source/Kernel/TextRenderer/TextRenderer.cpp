@@ -40,6 +40,17 @@ int32_t Arkn::TextRenderer::WriteLine(const Arkn::String& line)
     return 0;
 }
 
+
+int32_t Arkn::TextRenderer::WriteLine(uint8_t line)
+{
+    char hex_str[3];  
+
+    Arkn::String::Uint8ToHexString(line, hex_str);
+
+    return TextRenderer::WriteLine(Arkn::String(hex_str));
+}
+
+
 uint32_t Arkn::TextRenderer::CurrentYPos = 0;
 uint8_t Arkn::TextRenderer::m_BgColor = 0;
 uint8_t Arkn::TextRenderer::m_TextColor = 0;

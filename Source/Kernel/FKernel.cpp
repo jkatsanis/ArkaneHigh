@@ -4,6 +4,7 @@
 extern "C" void main() 
 {    
     Arkn::ArKernel kernel;
+
     kernel.Update();
         
     return;

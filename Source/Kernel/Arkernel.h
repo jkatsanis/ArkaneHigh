@@ -19,6 +19,6 @@ namespace Arkn
     public:
         ArKernel() = default;
 
-        void Update ();
+        void Update();
     };
 }

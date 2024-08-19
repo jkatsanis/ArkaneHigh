@@ -4,11 +4,9 @@
 
 void Arkn::Terminal::StartProgram()
 {
-    Arkn::TextRenderer::WriteLine("Hello from terminal program :)");
-
-
-    
-}
+    this->Init(COLOR_BLUE);
+    Arkn::TextRenderer::WriteLine("Hello from terminal program :)");   
+ }
 
 // Private
 
@@ -19,4 +17,16 @@ void Arkn::Terminal::Init(Color64 color)
     this->m_Cursor.DisableCursor();
 
     Arkn::TextRenderer::Update(15, fgColor);
+    Arkn::Screen::Fill(this->m_TerminalColor);
 }
+
+void Arkn::Terminal::Update()
+{
+
+}
+
+void Arkn::Terminal::OnKeyBoardPress(uint8_t scan)
+{
+    TextRenderer::WriteLine("No way this shit worked?");
+}
+

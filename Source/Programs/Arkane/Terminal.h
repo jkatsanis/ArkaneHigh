@@ -17,10 +17,13 @@ namespace Arkn
         Color64 m_TerminalColor;
 
         void Init(Color64 color);
+        void OnKeyBoardPress(uint8_t scan);
 
     public:
         Terminal() = default;
 
         void StartProgram() override;
+        void Update() override;
     };
+
 }

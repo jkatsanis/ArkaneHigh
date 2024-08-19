@@ -25,5 +25,7 @@ namespace Arkn
         /// @param string The line
         /// @return a rerturn code 0 succeeded -1, means it got to the end of the space height
         static int32_t WriteLine(const Arkn::String& string);
+        static int32_t WriteLine(uint8_t i);
+
     };
 }

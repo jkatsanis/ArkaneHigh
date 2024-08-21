@@ -11,6 +11,12 @@ void Arkn::ArKernel::Update()
 
     m_TerminalProgram.StartProgram();
 
+
+    HashMap map;
+    map.insert(5, 5);
+ 
+        
+
     while(1)
     { 
         if(!Globals::handling)

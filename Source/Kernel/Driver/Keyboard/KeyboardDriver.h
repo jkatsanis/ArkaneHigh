@@ -10,7 +10,6 @@ namespace Arkn
     {
     private:
         bool m_KeyReleased;
-        uint8_t m_Buffer;
 
     public:
         KeyboardDriver() = default;
@@ -18,7 +17,8 @@ namespace Arkn
         bool IsKeyReleased();
         void HandleKeyboard();
 
-        void SetBuffer(uint8_t t) { this->m_Buffer = t; }
+                uint8_t Buffer;
+
     };
 
 }

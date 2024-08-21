@@ -5,7 +5,6 @@
 #include "InterruptHandler.h"
 #include "KeyboardDriver.h"
 #include "Terminal.h"
-#include "Hashmap.h"
 
 namespace Arkn
 {

@@ -22,7 +22,10 @@ void Arkn::Terminal::Init(Color64 color)
 
 void Arkn::Terminal::Update()
 {
-
+    if(Globals::s_KeyboardDriver_ptr->IsKeyReleased())
+    {
+        OnKeyBoardPress(Globals::s_KeyboardDriver_ptr->Buffer);
+    }
 }
 
 void Arkn::Terminal::OnKeyBoardPress(uint8_t scan)

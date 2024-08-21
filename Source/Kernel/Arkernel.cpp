@@ -10,10 +10,7 @@ void Arkn::ArKernel::Update()
     // Initing programs
 
     m_TerminalProgram.StartProgram();
-
-
-    HashMap map;
-    map.insert(5, 5);
+  
  
         
 

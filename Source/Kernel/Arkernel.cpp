@@ -6,17 +6,19 @@ void Arkn::ArKernel::Update()
     m_InterruptHandler.Init();
     Globals::s_KeyboardDriver_ptr = &m_KeyboardDriver;
 
+    // Driver
+    m_KeyboardDriver.Start();
+
 
     // Initing programs
 
     m_TerminalProgram.StartProgram();
-  
- 
-        
+       
 
     while(1)
-    { 
-        if(!Globals::handling)
+    {
+        // Basicly event based now.. 
+        if(Globals::handling)
         {
             // Driver
             m_KeyboardDriver.HandleKeyboard();
@@ -24,11 +26,9 @@ void Arkn::ArKernel::Update()
             // Programs
             m_TerminalProgram.Update();
 
-
-            for (volatile int i = 0; i < 1000; i++) {
-            // Do nothing, just burn CPU cycles
-            }
+            Globals::handling = false;
         }
+      
     }
 }
 

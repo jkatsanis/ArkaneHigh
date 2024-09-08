@@ -1,11 +1,5 @@
 #include "KeyboardDriver.h"
 
-void Arkn::KeyboardDriver::Start()
-{
-    KeyboardDriver::B_PRESSED = KeyCodeData(KeyCode::B_PRESSED, 0);
-    Arkn::TextRenderer::WriteLine(KeyboardDriver::B_PRESSED.KeyCodeArrayPos); 
-}
-
 void Arkn::KeyboardDriver::HandleKeyboard()
 {
     m_KeyReleased = false;
@@ -15,13 +9,19 @@ void Arkn::KeyboardDriver::HandleKeyboard()
         return;
     }
 
-    if(Buffer == 0x84)
+    if (Buffer & 0x80) 
     {
-        TextRenderer::WriteLine("3 Released");
         m_KeyReleased = true;
+    }
+    else
+    {        
+        m_KeyReleased = false; 
     }    
+}
 
-    Buffer = 0;
+bool Arkn::KeyboardDriver::IsKeyActive(KeyCode code)
+{
+    return code == Buffer;   
 }
 
 bool Arkn::KeyboardDriver::IsKeyReleased()
@@ -29,14 +29,8 @@ bool Arkn::KeyboardDriver::IsKeyReleased()
     return this->m_KeyReleased;
 }
 
-void Arkn::KeyboardDriver::Clear()
+bool Arkn::KeyboardDriver::IsKeyPressed()
 {
-    this->m_KeyReleased = false;
-    for(int i = 0; i < MAX_KEY_CODES; i++)
-    {
-        m_KeyCodes[i] = false;
-    }
+    return !this->m_KeyReleased;
 }
-
-Arkn::KeyCodeData Arkn::KeyboardDriver::B_PRESSED = KeyCodeData();
 

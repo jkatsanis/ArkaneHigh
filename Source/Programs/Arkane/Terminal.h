@@ -17,7 +17,7 @@ namespace Arkn
         Color64 m_TerminalColor;
 
         void Init(Color64 color);
-        void OnKeyBoardPress(uint8_t scan);
+        void OnKeyBoardPress();
 
     public:
         Terminal() = default;

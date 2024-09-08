@@ -6,12 +6,7 @@ void Arkn::ArKernel::Update()
     m_InterruptHandler.Init();
     Globals::s_KeyboardDriver_ptr = &m_KeyboardDriver;
 
-    // Driver
-    m_KeyboardDriver.Start();
-
-
     // Initing programs
-
     m_TerminalProgram.StartProgram();
        
 

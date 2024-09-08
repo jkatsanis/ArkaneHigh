@@ -24,12 +24,15 @@ void Arkn::Terminal::Update()
 {
     if(Globals::s_KeyboardDriver_ptr->IsKeyReleased())
     {
-        OnKeyBoardPress(Globals::s_KeyboardDriver_ptr->Buffer);
+        OnKeyBoardPress();
     }
 }
 
-void Arkn::Terminal::OnKeyBoardPress(uint8_t scan)
+void Arkn::Terminal::OnKeyBoardPress()
 {
-    TextRenderer::WriteLine("No way this shit worked?");
+    if(Globals::s_KeyboardDriver_ptr->IsKeyActive(KeyCode::A_RELEASED))
+    {
+        TextRenderer::WriteLine("No way this shit worked?");
+    }
 }
 

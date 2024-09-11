@@ -12,7 +12,7 @@ namespace Arkn
 
     public:
         String(const char* str);
-        String(int32_t num);
+        String(char num);
 
         char operator[](uint32_t idx) const;
 
@@ -21,5 +21,6 @@ namespace Arkn
     public:
         static void StringCopy(char dest[], const char src[]);    
         static void Uint8ToHexString(uint8_t value, char* buffer);
+        static const char* IntToString(int32_t val);
     };
 }

@@ -24,15 +24,12 @@ void Arkn::Terminal::Update()
 {
     if(Globals::s_KeyboardDriver_ptr->IsKeyReleased())
     {
-        OnKeyBoardPress();
-    }
-}
+        const KeyCode code = (KeyCode)Globals::s_KeyboardDriver_ptr->Buffer;
 
-void Arkn::Terminal::OnKeyBoardPress()
-{
-    if(Globals::s_KeyboardDriver_ptr->IsKeyActive(KeyCode::A_RELEASED))
-    {
-        TextRenderer::WriteLine("No way this shit worked?");
+        const String codeStr = String(String::IntToString(3123123));
+
+        Arkn::TextRenderer::WriteLine("Pressed key: ");
+        Arkn::TextRenderer::WriteLine(codeStr);
     }
 }
 

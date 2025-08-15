@@ -1,3 +1,17 @@
+# HOW TO RUN
+- Clone it into ubuntu subsystem or linux
+- navigate in the folder and run **chmod +x SETUP.sh**
+- then ./SETUP.sh
+- cd Source
+- **chmod +x Build.sh**
+- make compile
+    - if you get **make: ./Build.sh: No such file or directory**
+    - run 
+        - sudo apt install dos2unix
+        - Build.sh
+- make run
+- and press keys and have fun :)
+
 # ArkaneOS
 A very small operating system working only in kernel lol.
 

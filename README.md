@@ -1,15 +1,15 @@
 # HOW TO RUN
 - Clone it into ubuntu subsystem or linux
 - navigate in the folder and run **chmod +x SETUP.sh**
-- then ./SETUP.sh
-- cd Source
-- **chmod +x Build.sh**
-- make compile
+- RUN ./SETUP.sh
+- RUN cd Source
+- RUN **chmod +x Build.sh**
+- RUN make compile
     - if you get **make: ./Build.sh: No such file or directory**
-    - run 
+    - RUN 
         - sudo apt install dos2unix
-        - Build.sh
-- make run
+        - dos2unix Build.sh
+- RUN make run
 - and press keys and have fun :)
 
 # ArkaneOS

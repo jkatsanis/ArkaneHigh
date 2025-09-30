@@ -1,4 +1,5 @@
 # HOW TO RUN
+- well you need a cross compiler and nasm but its ass to install that gl ye
 - Clone it into ubuntu subsystem or linux
 - navigate in the folder and run **chmod +x SETUP.sh**
 - RUN ./SETUP.sh
@@ -30,4 +31,5 @@ So the idea is to have a os with alot of kernel features, and you can create pro
 
 ## Some info
 - The Kernel folder is the literal kernel but also contains helper functions
+
 - The program folder is the os programs like terminal but also user programs that just use the kernel like a static
